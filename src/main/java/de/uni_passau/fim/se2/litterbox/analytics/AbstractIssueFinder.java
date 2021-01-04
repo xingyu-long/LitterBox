@@ -42,6 +42,8 @@ public abstract class AbstractIssueFinder implements IssueFinder, ScratchVisitor
     protected Program program;
     protected boolean ignoreLooseBlocks = false;
 
+    protected Set<String> blocks = new LinkedHashSet<>();
+
     @Override
     public Set<Issue> check(Program program) {
         Preconditions.checkNotNull(program);
@@ -49,6 +51,14 @@ public abstract class AbstractIssueFinder implements IssueFinder, ScratchVisitor
         issues = new LinkedHashSet<>();
         program.accept(this);
         return Collections.unmodifiableSet(issues);
+    }
+
+    public Set<String> findBlocks(Program program) {
+        Preconditions.checkNotNull(program);
+        this.program = program;
+        blocks = new LinkedHashSet<>();
+        program.accept(this);
+        return Collections.unmodifiableSet(blocks);
     }
 
     @Override
@@ -112,6 +122,10 @@ public abstract class AbstractIssueFinder implements IssueFinder, ScratchVisitor
                 currentActor, // TODO: There is no node?
                 null,  // TODO: There is no metadata
                 hint));
+    }
+
+    protected void addBlock(String id) {
+        blocks.add(id);
     }
 
     public void setIgnoreLooseBlocks(boolean value) {
