@@ -12,9 +12,8 @@ import de.uni_passau.fim.se2.litterbox.ast.model.statement.control.IfElseStmt;
 
 public class IfElse extends AbstractIssueFinder {
 
-    private List<String> ids = new ArrayList<>();
     // TODO: use this NAME for now, we will define our type later.
-    private String NAME="long_script";
+    private String NAME="if_else";
 
     @Override
     public void visit(Script node) {
@@ -24,7 +23,6 @@ public class IfElse extends AbstractIssueFinder {
     @Override
     public void visit(IfElseStmt node) {
         // If we visit the IfElseStmt, then we will add into issue for now.
-        addIssueWithLooseComment();
         BlockMetadata block = node.getMetadata();
         NonDataBlockMetadata blockData = (NonDataBlockMetadata) block;
         addBlock(blockData.getBlockId());

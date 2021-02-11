@@ -1,6 +1,7 @@
 package de.uni_passau.fim.se2.litterbox.analytics.pattern;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Assertions;
@@ -17,15 +18,15 @@ public class SensorWaitUntilNoTest implements JsonTest {
     public void testEmptyProgram() throws IOException, ParsingException {
         Program empty = getAST("./src/test/fixtures/emptyProject.json");
         SensorWaitUntilNo parameterName = new SensorWaitUntilNo();
-        Set<Issue> reports = parameterName.check(empty);
-        Assertions.assertEquals(0, reports.size());
+        List<String> blocks = parameterName.findBlocks(empty);
+        Assertions.assertEquals(0, blocks.size());
     }
 
     @Test
     public void testProgram() throws IOException, ParsingException {
         Program program = getAST("./src/test/fixtures/SensorWaitUntilNo.json");
         SensorWaitUntilNo parameterName = new SensorWaitUntilNo();
-        Set<String> blocks = parameterName.findBlocks(program);
+        List<String> blocks = parameterName.findBlocks(program);
         for (String block : blocks) {
             System.out.println(block);
         }
@@ -36,7 +37,7 @@ public class SensorWaitUntilNoTest implements JsonTest {
     public void testOneProgram() throws IOException, ParsingException {
         Program program = getAST("./src/test/fixtures/SensorWaitUntilNoOne.json");
         SensorWaitUntilNo parameterName = new SensorWaitUntilNo();
-        Set<String> blocks = parameterName.findBlocks(program);
+        List<String> blocks = parameterName.findBlocks(program);
         for (String block : blocks) {
             System.out.println(block);
         }
@@ -47,7 +48,7 @@ public class SensorWaitUntilNoTest implements JsonTest {
     public void testTwoProgram() throws IOException, ParsingException {
         Program program = getAST("./src/test/fixtures/SensorWaitUntilNoTwo.json");
         SensorWaitUntilNo parameterName = new SensorWaitUntilNo();
-        Set<String> blocks = parameterName.findBlocks(program);
+        List<String> blocks = parameterName.findBlocks(program);
         for (String block : blocks) {
             System.out.println(block);
         }

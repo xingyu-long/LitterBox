@@ -19,6 +19,12 @@
 package de.uni_passau.fim.se2.litterbox.analytics;
 
 import de.uni_passau.fim.se2.litterbox.analytics.bugpattern.*;
+import de.uni_passau.fim.se2.litterbox.analytics.pattern.ChangeAndClone;
+import de.uni_passau.fim.se2.litterbox.analytics.pattern.ChangeAndWait;
+import de.uni_passau.fim.se2.litterbox.analytics.pattern.DeleteElementFromList;
+import de.uni_passau.fim.se2.litterbox.analytics.pattern.IfElse;
+import de.uni_passau.fim.se2.litterbox.analytics.pattern.RepeatAndChange;
+import de.uni_passau.fim.se2.litterbox.analytics.pattern.SensorWaitUntilNo;
 import de.uni_passau.fim.se2.litterbox.analytics.smells.*;
 
 import java.util.*;
@@ -111,6 +117,18 @@ public class IssueTool {
         return smellFinders;
     }
 
+    private static Map<String, IssueFinder> generatePatternFinders() {
+        Map<String, IssueFinder> patternFinders = new LinkedHashMap<>();
+        registerPatternFinder(new ChangeAndClone(), patternFinders);
+        registerPatternFinder(new ChangeAndWait(), patternFinders);
+        registerPatternFinder(new DeleteElementFromList(), patternFinders);
+        registerPatternFinder(new IfElse(), patternFinders);
+        registerPatternFinder(new RepeatAndChange(), patternFinders);
+        registerPatternFinder(new SensorWaitUntilNo(), patternFinders);
+        return patternFinders;
+    }
+
+
     public static List<IssueFinder> getFinders(String commandString) {
         List<IssueFinder> finders = new ArrayList<>();
 
@@ -123,6 +141,9 @@ public class IssueTool {
                 break;
             case SMELLS:
                 finders = new ArrayList<>(generateSmellFinders().values());
+                break;
+            case PATTERNS:
+                finders = new ArrayList<>(generatePatternFinders().values());
                 break;
             case DEFAULT:
                 finders.addAll(generateAllFinders().values().stream().filter(f -> !f.getName().toLowerCase().endsWith("strict")).collect(Collectors.toList()));
@@ -171,5 +192,9 @@ public class IssueTool {
                     + " as Bug IssueFinder");
         }
         bugFinders.put(finder.getName(), finder);
+    }
+
+    static void registerPatternFinder(IssueFinder finder, Map<String, IssueFinder> patternFinders) {
+        patternFinders.put(finder.getName(), finder);
     }
 }

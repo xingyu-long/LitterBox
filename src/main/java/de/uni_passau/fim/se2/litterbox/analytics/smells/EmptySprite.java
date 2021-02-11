@@ -32,11 +32,14 @@ import de.uni_passau.fim.se2.litterbox.utils.Preconditions;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class EmptySprite implements IssueFinder, ScratchVisitor {
     public static final String NAME = "empty_sprite";
     private Set<Issue> issues = new LinkedHashSet<>();
+    private List<String> blocks = new LinkedList<>();
     private Program program = null;
 
     @Override
@@ -46,6 +49,15 @@ public class EmptySprite implements IssueFinder, ScratchVisitor {
         this.program = program;
         program.accept(this);
         return issues;
+    }
+
+    @Override
+    public List<String> findBlocks(Program program) {
+        Preconditions.checkNotNull(program);
+        this.program = program;
+        blocks = new LinkedList<>();
+        program.accept(this);
+        return blocks;
     }
 
     @Override

@@ -11,7 +11,7 @@ import de.uni_passau.fim.se2.litterbox.ast.model.statement.actorlook.ChangeGraph
 import de.uni_passau.fim.se2.litterbox.ast.model.statement.control.RepeatTimesStmt;
 
 public class RepeatAndChange extends AbstractIssueFinder {
-    private String NAME = "long_script";
+    private String NAME = "repeat_and_change";
 
     @Override
     public void visit(RepeatTimesStmt node) {

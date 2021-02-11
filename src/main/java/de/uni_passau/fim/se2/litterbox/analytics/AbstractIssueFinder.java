@@ -42,7 +42,7 @@ public abstract class AbstractIssueFinder implements IssueFinder, ScratchVisitor
     protected Program program;
     protected boolean ignoreLooseBlocks = false;
 
-    protected Set<String> blocks = new LinkedHashSet<>();
+    protected List<String> blocks = new ArrayList<>();
 
     @Override
     public Set<Issue> check(Program program) {
@@ -53,12 +53,13 @@ public abstract class AbstractIssueFinder implements IssueFinder, ScratchVisitor
         return Collections.unmodifiableSet(issues);
     }
 
-    public Set<String> findBlocks(Program program) {
+    @Override
+    public List<String> findBlocks(Program program) {
         Preconditions.checkNotNull(program);
         this.program = program;
-        blocks = new LinkedHashSet<>();
+        blocks = new ArrayList<>();
         program.accept(this);
-        return Collections.unmodifiableSet(blocks);
+        return Collections.unmodifiableList(blocks);
     }
 
     @Override

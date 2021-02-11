@@ -14,7 +14,8 @@ import de.uni_passau.fim.se2.litterbox.ast.model.statement.common.CreateCloneOf;
 import de.uni_passau.fim.se2.litterbox.ast.model.statement.control.RepeatTimesStmt;
 
 public class ChangeAndClone extends AbstractIssueFinder {
-    private String NAME = "long_script";
+    private String NAME = "change_and_clone";
+
 
     @Override
     public void visit(Script node) {

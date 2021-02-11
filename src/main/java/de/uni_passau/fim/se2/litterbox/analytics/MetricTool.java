@@ -54,7 +54,7 @@ public class MetricTool {
     public List<MetricExtractor> getAnalyzers() {
         return Collections.unmodifiableList(metrics);
     }
-
+    //TODO: return JSON
     public void createCSVFile(Program program, String fileName) throws IOException {
         List<String> headers = new ArrayList<>();
         headers.add("project");

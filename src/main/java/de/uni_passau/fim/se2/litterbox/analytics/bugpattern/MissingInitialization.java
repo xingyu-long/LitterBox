@@ -95,6 +95,12 @@ public class MissingInitialization implements IssueFinder {
         return Collections.unmodifiableSet(issues);
     }
 
+    // TODO: need to see later.
+    @Override
+    public List<String> findBlocks(Program program) {
+        return null;
+    }
+
     // TODO: Clean this up
     public String getDefineableName(Defineable def) {
         String result = "";

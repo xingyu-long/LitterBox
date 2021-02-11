@@ -13,7 +13,7 @@ import de.uni_passau.fim.se2.litterbox.ast.model.statement.common.WaitSeconds;
 import de.uni_passau.fim.se2.litterbox.ast.model.statement.control.IfThenStmt;
 
 public class ChangeAndWait extends AbstractIssueFinder {
-    private String NAME = "long_script";
+    private String NAME = "change_and_wait";
     
     @Override
     public void visit(IfThenStmt node) {

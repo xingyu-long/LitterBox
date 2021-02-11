@@ -21,6 +21,7 @@ package de.uni_passau.fim.se2.litterbox.analytics;
 import de.uni_passau.fim.se2.litterbox.ast.model.Program;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,6 +38,8 @@ public interface IssueFinder {
      * @return a IssueReport object
      */
     Set<Issue> check(Program program);
+
+    List<String> findBlocks(Program program);
 
     String getName();
 

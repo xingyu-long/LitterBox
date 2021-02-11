@@ -25,6 +25,8 @@ import de.uni_passau.fim.se2.litterbox.utils.IssueTranslator;
 import org.apache.commons.cli.*;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.Set;
 
 import static de.uni_passau.fim.se2.litterbox.utils.GroupConstants.*;
 
@@ -40,6 +42,8 @@ public class Main {
     private static final String STATS_SHORT = "s";
     private static final String HELP = "help";
     private static final String HELP_SHORT = "h";
+    private static final String PATTERN = "pattern";
+    private static final String PATTERN_SHORT = "pa";
 
     private static final String PROJECTPATH = "path";
     private static final String PROJECTPATH_SHORT = "p";
@@ -72,6 +76,7 @@ public class Main {
         mainMode.addOption(new Option(LEILA_SHORT, LEILA, false, "Translate specified Scratch projects to Leila"));
         mainMode.addOption(new Option(STATS_SHORT, STATS, false, "Extract metrics for Scratch projects"));
         mainMode.addOption(new Option(HELP_SHORT, HELP, false, "print this message"));
+        mainMode.addOption(new Option(PATTERN_SHORT, PATTERN, false, "Find patterns for specified Scratch projects"));
 
         Options options = new Options();
         options.addOptionGroup(mainMode);
@@ -190,6 +195,23 @@ public class Main {
         runAnalysis(cmd, analyzer);
     }
 
+    static void patternsPrograms(CommandLine cmd) throws ParseException {
+        // PatternAnalyzer(), without output.
+        // 
+        String detectors = cmd.getOptionValue(DETECTORS, PATTERNS);
+
+        if (!cmd.hasOption(PROJECTPATH)) {
+            throw new ParseException("Input path option '" + PROJECTPATH + "' required");
+        }
+
+        String outputPath = cmd.getOptionValue(OUTPUT);
+        String input = cmd.getOptionValue(PROJECTPATH);
+        
+        boolean ignoreLooseBlocks = cmd.hasOption(IGNORE_LOOSE_BLOCKS);
+        PatternAnalyzer analyzer = new PatternAnalyzer(input, outputPath, detectors, ignoreLooseBlocks, cmd.hasOption(DELETE_PROJECT_AFTERWARDS));
+        runAnalysis(cmd, analyzer);
+    }
+
     static void runAnalysis(CommandLine cmd, Analyzer analyzer) {
         if (cmd.hasOption(PROJECTID)) {
             String projectId = cmd.getOptionValue(PROJECTID);
@@ -217,6 +239,9 @@ public class Main {
                 statsPrograms(cmd);
             } else if (cmd.hasOption(LEILA)) {
                 translatePrograms(cmd);
+            } else if (cmd.hasOption(PATTERN)) {
+                System.out.println("We are trying to find patterns!");
+                patternsPrograms(cmd);
             } else {
                 printHelp();
             }

@@ -1,6 +1,7 @@
 package de.uni_passau.fim.se2.litterbox.analytics.pattern;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,7 @@ public class ChangeAndWaitTest implements JsonTest {
     public void testTwoProgram() throws IOException, ParsingException {
         Program program = getAST("./src/test/fixtures/TestTwo.json");
         ChangeAndWait parameterName = new ChangeAndWait();
-        Set<String> blocks = parameterName.findBlocks(program);
+        List<String> blocks = parameterName.findBlocks(program);
         for (String block : blocks) {
             System.out.println(block);
         }
@@ -36,7 +37,7 @@ public class ChangeAndWaitTest implements JsonTest {
         // Multiple Sprite.
         Program program = getAST("./src/test/fixtures/ChangeAndWaitTwo.json");
         ChangeAndWait parameterName = new ChangeAndWait();
-        Set<String> blocks = parameterName.findBlocks(program);
+        List<String> blocks = parameterName.findBlocks(program);
         for (String block : blocks) {
             System.out.println(block);
         }

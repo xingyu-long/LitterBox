@@ -24,4 +24,5 @@ public class GroupConstants {
     public static final String SMELLS = "smells";
     public static final String BUGS = "bugs";
     public static final String DEFAULT = "default";
+    public static final String PATTERNS = "patterns";
 }

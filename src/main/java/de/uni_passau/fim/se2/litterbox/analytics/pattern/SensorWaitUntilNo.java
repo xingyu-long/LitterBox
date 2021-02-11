@@ -14,7 +14,7 @@ import de.uni_passau.fim.se2.litterbox.ast.model.statement.common.WaitUntil;
 import de.uni_passau.fim.se2.litterbox.ast.model.statement.control.IfThenStmt;
 
 public class SensorWaitUntilNo extends AbstractIssueFinder {
-    private String NAME = "long_script";
+    private String NAME = "sensor_wait_until_no";
 
     @Override
     public void visit(IfThenStmt node) {

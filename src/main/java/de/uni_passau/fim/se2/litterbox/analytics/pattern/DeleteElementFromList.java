@@ -13,7 +13,7 @@ import de.uni_passau.fim.se2.litterbox.ast.model.statement.control.UntilStmt;
 import de.uni_passau.fim.se2.litterbox.ast.model.statement.list.DeleteOf;
 
 public class DeleteElementFromList extends AbstractIssueFinder {
-    private String NAME = "long_script";
+    private String NAME = "delete_element_from_list";
 
     @Override
     public void visit(UntilStmt node) {

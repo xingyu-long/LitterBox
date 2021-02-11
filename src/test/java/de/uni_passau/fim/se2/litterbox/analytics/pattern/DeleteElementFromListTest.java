@@ -1,6 +1,7 @@
 package de.uni_passau.fim.se2.litterbox.analytics.pattern;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -16,15 +17,15 @@ public class DeleteElementFromListTest implements JsonTest {
     public void testEmptyProgram() throws IOException, ParsingException {
         Program empty = getAST("./src/test/fixtures/emptyProject.json");
         DeleteElementFromList parameterName = new DeleteElementFromList();
-        Set<Issue> reports = parameterName.check(empty);
-        Assertions.assertEquals(0, reports.size());
+        List<String> blocks = parameterName.findBlocks(empty);
+        Assertions.assertEquals(0, blocks.size());
     }
 
     @Test
     public void testRemoveElementProgram() throws IOException, ParsingException {
         Program program = getAST("./src/test/fixtures/DeleteElementFromList.json");
         DeleteElementFromList parameterName = new DeleteElementFromList();
-        Set<String> blocks= parameterName.findBlocks(program);
+        List<String> blocks= parameterName.findBlocks(program);
         for (String block : blocks) {
             System.out.println(block);
         }
@@ -35,7 +36,7 @@ public class DeleteElementFromListTest implements JsonTest {
     public void testRemoveElementTwoProgram() throws IOException, ParsingException {
         Program program = getAST("./src/test/fixtures/DeleteElementFromListTwo.json");
         DeleteElementFromList parameterName = new DeleteElementFromList();
-        Set<String> blocks= parameterName.findBlocks(program);
+        List<String> blocks= parameterName.findBlocks(program);
         for (String block : blocks) {
             System.out.println(block);
         }
